@@ -19,16 +19,14 @@ require('mason-lspconfig').setup({
 
 
 local cmp = require('cmp')
-local cmp_action = require('lsp-zero').cmp_action()
+--local cmp_action = require('lsp-zero').cmp_action()
 
 cmp.setup({
+  sources = {
+    {name = 'nvim_lsp'},
+    {name = 'buffer'},
+  },
   mapping = cmp.mapping.preset.insert({
     ['<Tab>'] = cmp.mapping.confirm({ select = true }),
   })
 })
-
--- local cmp_select = {behavior = cmp.SelectBehavior.Select}
--- local cmp_mappings = lsp_zero.defaults.cmp_mappings({
---   ["<Tab>"] = cmp.mapping.complete(),
--- })
-
