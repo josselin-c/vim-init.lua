@@ -19,14 +19,36 @@ require('mason-lspconfig').setup({
 
 
 local cmp = require('cmp')
---local cmp_action = require('lsp-zero').cmp_action()
 
 cmp.setup({
   sources = {
     {name = 'nvim_lsp'},
-    {name = 'buffer'},
+    {name = 'path'},
+    {
+      name = 'buffer',
+      option = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end
+      }
+    }
   },
   mapping = cmp.mapping.preset.insert({
     ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+  })
+})
+
+cmp.setup.filetype('markdown', {
+  sources = cmp.config.sources({
+    {name = 'path'},
+    {
+      name = 'buffer',
+      keyword_length=5,
+      option = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end
+      }
+    }
   })
 })
