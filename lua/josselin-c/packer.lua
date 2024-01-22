@@ -24,6 +24,13 @@ return require('packer').startup(function(use)
     "neovim/nvim-lspconfig",
   }
 
+  use({
+    "stevearc/conform.nvim",
+    config = function()
+      require("conform").setup()
+    end,
+  })
+
   use {
       'VonHeikemen/lsp-zero.nvim',
       branch = 'v3.x',
